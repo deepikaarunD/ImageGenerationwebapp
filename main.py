@@ -3,6 +3,8 @@ import urllib.request
 from PIL import Image
 import streamlit as st
 import os
+env:
+  OPENAI_API_KEY: ${{secrets.OPENAI_API_KEY}}
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
@@ -14,7 +16,6 @@ def generate_image(image_description):
         size="512x512")
 
     img_url = img_response['data'][0]['url']
-
     urllib.request.urlretrieve(img_url, 'img.png')
 
     img = Image.open("img.png")
